@@ -27,7 +27,7 @@ console.log(cvBlock)
         <!-- {cvBlock.body} -->
         <ul class="flex flex-wrap text-base gap-x-3 gap-y-3 mt-3"> 
             {
-                cvBlock.data.tags.map(tag => (
+                cvBlock.data.tags.map((tag: string) => (
                     <li v-for="tag in projectPage.tags" class="bg-neutral-800 hover:bg-neutral-700 hover:cursor-pointer text-sm rounded-full px-2 inline-block">
                         {tag}
                     </li>

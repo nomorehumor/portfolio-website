@@ -6,45 +6,47 @@ const { beginningDate, endDate } = Astro.props;
 
 <script is:inline src="/portfolio-website/two.js" />
 
-<script>    
-    customElements.define('astro-timeline', class extends HTMLElement {
-        constructor() {
-            super();
-            this.createVector(this.dataset.beginning!, this.dataset.end!);
-        }
-        createVector(beginningDate: string, endDate: string) {
-            // const canvas = document.querySelector("#line");
-            const canvas = this;
-            const computedHeight = canvas?.parentElement?.clientHeight! 
-                                    - parseFloat(getComputedStyle(canvas?.parentElement!).paddingTop) 
-                                    - parseFloat(getComputedStyle(canvas?.parentElement!).paddingBottom);
-            const params = { width: canvas?.clientWidth, height: computedHeight};
-            let two = new Two(params).appendTo(canvas);
-            console.log(params);
-            console.log(canvas?.parentElement);
+<script>
+import Two from "../../public/two";
+
+customElements.define('astro-timeline', class extends HTMLElement {
+    constructor() {
+        super();
+        this.createVector(this.dataset.beginning!, this.dataset.end!);
+    }
+    createVector(beginningDate: string, endDate: string) {
+        // const canvas = document.querySelector("#line");
+        const canvas = this;
+        const computedHeight = canvas?.parentElement?.clientHeight! 
+                                - parseFloat(getComputedStyle(canvas?.parentElement!).paddingTop) 
+                                - parseFloat(getComputedStyle(canvas?.parentElement!).paddingBottom);
+        const params = { width: canvas?.clientWidth, height: computedHeight};
+        let two = new Two(params).appendTo(canvas);
+        console.log(params);
+        console.log(canvas?.parentElement);
+
+        const circleX = 70;
+        const circle1Y = 10;
+        const circle2Y = params.height!-5;
+        const textX = circleX-35;
+        const color = 'rgb(212,212,216)';
+
+        const circle1 = two.makeCircle(circleX, circle1Y, 4);
+        circle1.fill = color;
+        const text1 = two.makeText(endDate, textX, circle1Y);
+        text1.fill = color;
+        text1.family = 'JetBrains Mono';
+
+        const circle2 = two.makeCircle(circleX, circle2Y, 4);
+        circle2.fill = color;
+        const text2 = two.makeText(beginningDate, textX, circle2Y);
+        text2.fill = color;
+        text2.family = 'JetBrains Mono';
+
+        const line = two.makeLine(circleX, circle1Y, circleX, circle2Y);
+        line.stroke = color;
+        two.update()
+    }
+}); 
     
-            const circleX = 70;
-            const circle1Y = 10;
-            const circle2Y = params.height!-5;
-            const textX = circleX-35;
-            const color = 'rgb(212,212,216)';
-    
-            const circle1 = two.makeCircle(circleX, circle1Y, 4);
-            circle1.fill = color;
-            const text1 = two.makeText(endDate, textX, circle1Y);
-            text1.fill = color;
-            text1.family = 'JetBrains Mono';
-    
-            const circle2 = two.makeCircle(circleX, circle2Y, 4);
-            circle2.fill = color;
-            const text2 = two.makeText(beginningDate, textX, circle2Y);
-            text2.fill = color;
-            text2.family = 'JetBrains Mono';
-    
-            const line = two.makeLine(circleX, circle1Y, circleX, circle2Y);
-            line.stroke = color;
-            two.update()
-        }
-    }); 
-    
-    </script>
+</script>

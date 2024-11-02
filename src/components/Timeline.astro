@@ -6,6 +6,8 @@ const { beginningDate, endDate } = Astro.props;
 
 <script is:inline src="/portfolio-website/two.js"/>
 <script>
+import Two from "../../public/two";
+
 customElements.define('astro-timeline', class extends HTMLElement {
     constructor() {
         super();

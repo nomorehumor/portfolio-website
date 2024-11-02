@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Timeline from './Timeline.astro';
+
+interface Props {
+  cvBlock: CollectionEntry<'cv'>;
+}
+
+const { cvBlock } = Astro.props;
+const { Content, headings } = await cvBlock.render();
+console.log(cvBlock)
+---
+
+<div id="block" class="p-4 rounded-s border-t-2 last-of-type:border-b-2 border-neutral-800 text-zinc-300 flex flex-row">  
+    <Timeline class="w-1/6" beginningDate={cvBlock.data.beginningDate} endDate={cvBlock.data.endDate} />
+    <div class="w-5/6">
+        <!-- <span>{cvBlock.data.emoji}</span> -->
+        <a href={cvBlock.data.url} class="font-bold text-l" target="_blank">
+            {cvBlock.data.company}
+        </a>
+        <h1 class="font-normal text-sm">
+            {cvBlock.data.title}
+        </h1>
+
+        <Content class="font-light text-s" />
+
+        <!-- {cvBlock.body} -->
+        <ul class="flex flex-wrap text-base gap-x-3 gap-y-3 mt-3"> 
+            {
+                cvBlock.data.tags.map(tag => (
+                    <li v-for="tag in projectPage.tags" class="bg-neutral-800 hover:bg-neutral-700 hover:cursor-pointer text-sm rounded-full px-2 inline-block">
+                        {tag}
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</div>
+
+<style is:global>
+p {
+    @apply font-light;
+}
+
+ul {
+    @apply list-disc;
+    @apply font-light;
+    @apply text-sm;
+}
+
+a {
+    @apply underline;
+    @apply decoration-dotted;
+    @apply underline-offset-4;
+}
+
+a:hover {
+    @apply underline;
+    @apply decoration-solid;
+    cursor: pointer;
+}
+
+</style>
+
+<!-- <script is:inline src="two.js" /> -->
+

@@ -4,10 +4,9 @@ const { beginningDate, endDate } = Astro.props;
 
 <astro-timeline class="w-24" data-beginning={beginningDate} data-end={endDate}></astro-timeline>  
 
-<script>
-    import Two from 'https://cdn.skypack.dev/two.js@latest';
-    
-    
+<script is:inline src="/portfolio-website/two.js" />
+
+<script>    
     customElements.define('astro-timeline', class extends HTMLElement {
         constructor() {
             super();

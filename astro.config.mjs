@@ -7,5 +7,5 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [tailwind()],
   site: 'https://nomorehumor.github.io',
-  base: 'portflio-website',
+  base: 'portfolio-website',
 });

@@ -18,17 +18,19 @@ console.log(cvBlock)
         <a href={cvBlock.data.url} class="font-bold text-l" target="_blank">
             {cvBlock.data.company}
         </a>
-        <h1 class="font-normal text-sm">
+        <h1 class="font-normal text-sm mt-2">
             {cvBlock.data.title}
         </h1>
 
-        <Content class="font-light text-s" />
+        <div class="mt-4">
+            <Content />
+        </div>
 
         <!-- {cvBlock.body} -->
-        <ul class="flex flex-wrap text-base gap-x-3 gap-y-3 mt-3"> 
+        <ul class="flex flex-wrap text-base gap-x-1 gap-y-1 mt-3"> 
             {
                 cvBlock.data.tags.map((tag: string) => (
-                    <li v-for="tag in projectPage.tags" class="bg-neutral-800 hover:bg-neutral-700 hover:cursor-pointer text-sm rounded-full px-2 inline-block">
+                    <li v-for="tag in projectPage.tags" class="bg-neutral-800 hover:bg-neutral-700 hover:cursor-pointer text-xs rounded-full px-2 py-1 inline-block">
                         {tag}
                     </li>
                 ))
@@ -40,6 +42,8 @@ console.log(cvBlock)
 <style is:global>
 p {
     @apply font-light;
+    font-size: 0.85em;
+    @apply text-zinc-400;
 }
 
 ul {

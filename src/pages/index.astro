@@ -15,40 +15,42 @@ cvBlocks.sort((block1, block2) => (block2.data.id - block1.data.id));
 		<meta charset="utf-8">
 	</head>
 	
-	<body class="flex flex-col m-0">
-		<main class="w-full h-full flex flex-col place-items-center align-middle text-zinc-300">
-		<!-- <SideBar></SideBar> -->
-			<div>
+	<body class="flex flex-col place-items-center m-0">
+		<main class="w-1/3 h-full flex flex-col place-items-center align-middle text-zinc-300">
+			<div class="w-full">
 				<div class="text-left">
-				<div class="text-x mt-16 font-medium">Maxim Popov</div>
-				<div class="font-thin">Software Developer</div>
-				<div class="flex flex-row mt-1 gap-2">
-					<a href="http://www.linkedin.com/in/popov-maxim" target="_blank"><img src={linkedinLogo.src} class="socialIcon"></a>
-					<a href="https://github.com/nomorehumor" target="_blank"><img src={githubLogo.src} class="socialIcon"></a>
-					<a href="mailto:itsmail4max@gmail.com" target="_blank"><img src={emailLogo.src} class="socialIcon"></a>
-		
-				</div>
+					<div class="text-x mt-16 font-medium">Maxim Popov</div>
+					<div class="font-thin">Software Developer</div>
+					<div class="flex flex-row mt-1 gap-2">
+						<a href="http://www.linkedin.com/in/popov-maxim" target="_blank"><img src={linkedinLogo.src} class="socialIcon"></a>
+						<a href="https://github.com/nomorehumor" target="_blank"><img src={githubLogo.src} class="socialIcon"></a>
+						<a href="mailto:itsmail4max@gmail.com" target="_blank"><img src={emailLogo.src} class="socialIcon"></a>
+			
+					</div>
 				</div>
 			
 				<div class="text-left mt-8">
 				<h2 class="text-left">About</h2>
 				<p class="font-light">
-					I am a software developer and M.Sc. Computer Science student at <a href="http://www.tu.berlin" class="underline decoration-1">TU Berlin</a>. <br/>
-					Currently I am working as a part-time software developer at <a href="http://www.breuer-gmbh.de" class="underline decoration-1">Breuer GmbH</a>.
+					I am a software developer with B.Sc. Computer Science degree from <a href="https://www.kit.edu/" target="_blank">KIT</a> and ongoing M.Sc. Computer Science student at <a href="http://www.tu.berlin" target="_blank" class="underline decoration-1">TU Berlin</a>. <br/>
+					Currently I am working as a part-time software developer at <a href="http://www.breuer-gmbh.de" target="_blank" class="underline decoration-1">Breuer GmbH</a>.
 				</p>
 				</div>
 			</div>
 		
-			<!-- <div class="m-5">
-				<button id="experience-tablink" :class="{activeTablink: activeTab == 'experience', tablink:true}" v-on:click="this.openTab('experience')">Experience</button>
+			<!-- <div class="mt-5">
+				<button id="experience-tablink" class="tablink">Work Experience</button> -->
 		
-				<span class="w-[1px] h-5 mx-2 bg-zinc-400 inline-block align-middle"></span>
+				<!-- <span class="w-[1px] h-5 mx-2 bg-zinc-400 inline-block align-middle"></span>
 				
-				<button id="projects-tablink" :class="{activeTablink: activeTab == 'projects', tablink:true}" v-on:click="this.openTab('projects')">Projects</button>
-			</div> -->
+				<button id="projects-tablink" :class="{activeTablink: activeTab == 'projects', tablink:true}" v-on:click="this.openTab('projects')">Projects</button> -->
+			<!-- </div> -->
 		
-			<div class="w-1/2 mt-6">
-				{cvBlocks.map(block => (<CVBlock cvBlock={block}></CVBlock>))}
+			<div class="mt-8">
+				<h2 class="text-left">Work Experience</h2>
+				<div class="flex flex-col place-items-center justify-center">
+					{cvBlocks.map(block => (<CVBlock cvBlock={block}></CVBlock>))}
+				</div>
 			</div>
 		
 			<!-- <div id="experience" class="tab" v-show="this.activeTab=='experience'"> -->
@@ -60,24 +62,7 @@ cvBlocks.sort((block1, block2) => (block2.data.id - block1.data.id));
 				<SearchBar class="mt-8"></SearchBar>
 				<FilterButtonPanel class="mt-8"></FilterButtonPanel>
 			</div> -->
-		
-			<!-- <Tabs>
-				<TabList class="justify-items-center"> 
-				<Tab value="0" class="h-10">Experience</Tab>
-				<Tab value="1" class="h-10">Projects</Tab>
-				</TabList>
-				<TabPanels>
-				<TabPanel value="0">
-					<BriefInfo></BriefInfo>
-				</TabPanel>
-				<TabPanel value="1">
-					<div class="text-2xl text-center font-bold text-zinc-500">Take a look at what I did so far:</div>
-					<SkillCircle class="mt-4"></SkillCircle>
-					<SearchBar class="mt-8"></SearchBar>
-					<FilterButtonPanel class="mt-8"></FilterButtonPanel>
-				</TabPanel>
-				</TabPanels>
-			</Tabs> -->
+				
 		
 			<div class="flex items-center w-3/4 h-5/8 mt-10 gap-20">
 				<div class="basis-1/2 flex flex-col place-items-center">
@@ -101,11 +86,9 @@ cvBlocks.sort((block1, block2) => (block2.data.id - block1.data.id));
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-html {
-}
+
 main {
-	/* z-index: -2; */
-	font-family: 'Work Sans', sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 	flex: 1;
 }
 

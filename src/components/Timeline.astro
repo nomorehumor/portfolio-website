@@ -10,34 +10,41 @@ import Two from 'two.js';
 
 customElements.define('astro-timeline', class extends HTMLElement {
     resizeObserver: ResizeObserver | undefined;
-    params: { width: number | undefined, height: number | undefined} | undefined;
+    // params: { width: number | undefined, height: number | undefined} | undefined;
     two: Two | undefined;
+    shapes: Array<any> = [];
     constructor() {
         super();
         
-
-        const canvas = this;
-        const computedHeight = this.parentElement?.clientHeight! 
-                                - parseFloat(getComputedStyle(this.parentElement!).paddingTop) 
-                                - parseFloat(getComputedStyle(this.parentElement!).paddingBottom);
-        this.params = { width: canvas?.clientWidth, height: computedHeight};
-        this.two = new Two(this.params).appendTo(canvas);
+        this.initTwo();
         this.createVector(this.dataset.beginning!, this.dataset.end!);
 
         this.resizeObserver = new ResizeObserver(() => {
             this.refresh();
         });
-        // this.resizeObserver.observe(this.parentElement!);
+        this.resizeObserver.observe(this.parentElement!);
     }
     refresh() {
+        this.removeChild(this.two!.renderer.domElement);
+        this.initTwo();
         this.createVector(this.dataset.beginning!, this.dataset.end!);
     }
+    initTwo() {
+        const computedHeight = this.parentElement?.clientHeight! 
+                                - parseFloat(getComputedStyle(this.parentElement!).paddingTop) 
+                                - parseFloat(getComputedStyle(this.parentElement!).paddingBottom);
+        const params = { width: this.clientWidth, height: computedHeight};
+        console.log(params);
+        this.two = new Two(params).appendTo(this);
+        this.two!.bind('resize', () => {
+            this.refresh();
+        });
+    }
     createVector(beginningDate: string, endDate: string) {
-        this.two!.clear();
-        console.log("drawing vector")
+        console.log("drawing vector");
         const circleX = 70;
         const circle1Y = 10;
-        const circle2Y = this.params!.height!-5;
+        const circle2Y = this.two!.height!-5;
         const textX = circleX-35;
         const color = 'rgb(212,212,216)';
 
@@ -56,6 +63,7 @@ customElements.define('astro-timeline', class extends HTMLElement {
         const line = this.two!.makeLine(circleX, circle1Y, circleX, circle2Y);
         line.stroke = color;
         this.two!.update()
+        this.shapes.push(circle1, circle2, text1, text2, line);
     }
 }); 
     

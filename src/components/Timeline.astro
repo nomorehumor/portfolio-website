@@ -9,42 +9,53 @@ const { beginningDate, endDate } = Astro.props;
 import Two from 'two.js';
 
 customElements.define('astro-timeline', class extends HTMLElement {
+    resizeObserver: ResizeObserver | undefined;
+    params: { width: number | undefined, height: number | undefined} | undefined;
+    two: Two | undefined;
     constructor() {
         super();
+        
+
+        const canvas = this;
+        const computedHeight = this.parentElement?.clientHeight! 
+                                - parseFloat(getComputedStyle(this.parentElement!).paddingTop) 
+                                - parseFloat(getComputedStyle(this.parentElement!).paddingBottom);
+        this.params = { width: canvas?.clientWidth, height: computedHeight};
+        this.two = new Two(this.params).appendTo(canvas);
+        this.createVector(this.dataset.beginning!, this.dataset.end!);
+
+        this.resizeObserver = new ResizeObserver(() => {
+            this.refresh();
+        });
+        // this.resizeObserver.observe(this.parentElement!);
+    }
+    refresh() {
         this.createVector(this.dataset.beginning!, this.dataset.end!);
     }
     createVector(beginningDate: string, endDate: string) {
-        // const canvas = document.querySelector("#line");
-        const canvas = this;
-        const computedHeight = canvas?.parentElement?.clientHeight! 
-                                - parseFloat(getComputedStyle(canvas?.parentElement!).paddingTop) 
-                                - parseFloat(getComputedStyle(canvas?.parentElement!).paddingBottom);
-        const params = { width: canvas?.clientWidth, height: computedHeight};
-        let two = new Two(params).appendTo(canvas);
-        console.log(params);
-        console.log(canvas?.parentElement);
-
+        this.two!.clear();
+        console.log("drawing vector")
         const circleX = 70;
         const circle1Y = 10;
-        const circle2Y = params.height!-5;
+        const circle2Y = this.params!.height!-5;
         const textX = circleX-35;
         const color = 'rgb(212,212,216)';
 
-        const circle1 = two.makeCircle(circleX, circle1Y, 4);
+        const circle1 = this.two!.makeCircle(circleX, circle1Y, 4);
         circle1.fill = color;
-        const text1 = two.makeText(endDate, textX, circle1Y);
+        const text1 = this.two!.makeText(endDate, textX, circle1Y);
         text1.fill = color;
         text1.family = 'JetBrains Mono';
 
-        const circle2 = two.makeCircle(circleX, circle2Y, 4);
+        const circle2 = this.two!.makeCircle(circleX, circle2Y, 4);
         circle2.fill = color;
-        const text2 = two.makeText(beginningDate, textX, circle2Y);
+        const text2 = this.two!.makeText(beginningDate, textX, circle2Y);
         text2.fill = color;
         text2.family = 'JetBrains Mono';
 
-        const line = two.makeLine(circleX, circle1Y, circleX, circle2Y);
+        const line = this.two!.makeLine(circleX, circle1Y, circleX, circle2Y);
         line.stroke = color;
-        two.update()
+        this.two!.update()
     }
 }); 
     

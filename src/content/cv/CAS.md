@@ -2,7 +2,7 @@
 id: 0
 company: 'CAS Software AG'
 title: 'Fullstack Developer Working Student + Bachelor Thesis'
-tags: [Java EE, Fullstack, Angular, TypeScript, PostgreSQL]
+tags: [Java EE, Angular, PostgreSQL, Redux, TypeScript]
 beginningDate: 01.2022
 endDate: 10.2022
 emoji: ⚙

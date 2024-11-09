@@ -6,13 +6,13 @@ const { Content, headings } = await project.render();
 console.log(project)
 ---
 
-<div class="border-zinc-700 border rounded-xl w-[49%] p-4 flex flex-col justify-between content-between">
+<div class="border-zinc-700 border rounded-xl sm:w-[49%] w-full p-4 flex flex-col justify-between content-between">
     <div class="flex flex-row justify-between">
         <span>
-            <h1 class="font-medium">
+            <h2 class="font-medium">
                 {project.data.title} 
                 {project.data.year != "ongoing" ? <span class="text-xs font-mono ml-1">{project.data.year} </span> : <span class="ongoing ml-1 text-xs text-yellow-500">in progress</span>}
-            </h1>
+            </h2>
         </span>
         { project.data.url && project.url != "" ? <a href={project.data.url} target="_blank"><img src={githubLogo.src} class="float-end socialIcon"></a> : "" }
     </div>

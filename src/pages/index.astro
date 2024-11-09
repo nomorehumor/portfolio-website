@@ -14,8 +14,8 @@ cvBlocks.sort((block1, block2) => (block2.data.id - block1.data.id));
 const projects = await getCollection('projects');
 projects.sort((project1, project2) => project1.data.year == "ongoing" ? -1 : project2.data.year == "ongoing" ? 1 : (project2.data.year - project1.data.year));
 
-const voluntary = await getCollection('voluntary');
-voluntary.sort((project1, project2) => project1.data.year == "ongoing" ? -1 : project2.data.year == "ongoing" ? 1 : (project2.data.year - project1.data.year));
+// const voluntary = await getCollection('voluntary');
+// voluntary.sort((project1, project2) => project1.data.year == "ongoing" ? -1 : project2.data.year == "ongoing" ? 1 : (project2.data.id - project1.data.id));
 ---
 <html class="bg-[#121212]">
 	<head>
@@ -50,30 +50,19 @@ voluntary.sort((project1, project2) => project1.data.year == "ongoing" ? -1 : pr
 				<div class="text-left mt-8">
 				<h2 class="text-left">About</h2>
 				<Brief></Brief>
-				<!-- <p class="font-light">
-					I am a software developer with B.Sc. Computer Science degree from <a href="https://www.kit.edu/" target="_blank">KIT</a> and ongoing M.Sc. Computer Science student at <a href="http://www.tu.berlin" target="_blank" class="underline decoration-1">TU Berlin</a>. <br/>
-					Currently I am working as a part-time software developer at <a href="http://www.breuer-gmbh.de" target="_blank" class="underline decoration-1">Breuer GmbH</a>.
-				</p> -->
 				</div>
 			</div>
 		
-			<!-- <div class="mt-5">
-				<button id="experience-tablink" class="tablink">Work Experience</button> -->
-		
-				<!-- <span class="w-[1px] h-5 mx-2 bg-zinc-400 inline-block align-middle"></span>
-				
-				<button id="projects-tablink" :class="{activeTablink: activeTab == 'projects', tablink:true}" v-on:click="this.openTab('projects')">Projects</button> -->
-			<!-- </div> -->
 		
 			<div class="w-full mt-8">
 				<h2 class="text-left border-neutral-800 border-b-2">
 					<span id="work-tablink" class="tablink" onclick="openWork()">Work Experience</span>
-					<span id="projects-tablink" class="tablink activeTablink ml-2" onclick="openProjects()">Projects</span>
+					<span id="projects-tablink" class="tablink ml-2" onclick="openProjects()">Projects</span>
 				</h2>
-				<div id="work" class="flex flex-col place-items-center justify-center hidden">
+				<div id="work" class="flex flex-col place-items-center justify-center">
 					{cvBlocks.map(block => (<CVBlock cvBlock={block}></CVBlock>))}
 				</div>
-				<div id="projects" class="flex flex-row flex-wrap gap-x-1 gap-y-4 justify-between mt-4">
+				<div id="projects" class="flex flex-col flex-wrap gap-x-1 gap-y-4 justify-between mt-4 sm:flex-row">
 					{projects.map(project => (<ProjectBlock project={project}></ProjectBlock>))}
 					<!-- {cvBlocks.map(block => (<CVBlock cvBlock={block}></CVBlock>))} -->
 				</div>
@@ -162,6 +151,10 @@ main {
 </style>
 
 <script is:inline>
+	// Initial state
+	document.getElementById('projects').style.display = 'none';
+	document.getElementById('work-tablink').classList.add('activeTablink');
+
 	function openProjects() {
 		document.getElementById('work').style.display = 'none';
 		document.getElementById('projects').style.display = 'flex';

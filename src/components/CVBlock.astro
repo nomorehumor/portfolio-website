@@ -11,7 +11,7 @@ const { Content, headings } = await cvBlock.render();
 console.log(cvBlock)
 ---
 
-<div id="block" class="p-4 rounded-s border-t-2 last-of-type:border-b-2 border-neutral-800 text-zinc-300 flex flex-row">  
+<div id="block" class="p-4 rounded-s border-b-2 border-neutral-800 text-zinc-300 flex flex-row">  
     <Timeline class="w-1/6" beginningDate={cvBlock.data.beginningDate} endDate={cvBlock.data.endDate} />
     <div class="w-5/6">
         <!-- <span>{cvBlock.data.emoji}</span> -->
@@ -65,5 +65,3 @@ a:hover {
 }
 
 </style>
-
-

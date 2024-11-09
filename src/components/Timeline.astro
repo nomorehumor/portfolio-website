@@ -4,13 +4,12 @@ const { beginningDate, endDate } = Astro.props;
 
 <astro-timeline class="w-24" data-beginning={beginningDate} data-end={endDate}></astro-timeline>  
 
-<script is:inline src="/portfolio-website/two.js"/>
+<script is:inline src="two.js"/>
 <script>
 import Two from 'two.js';
 
 customElements.define('astro-timeline', class extends HTMLElement {
     resizeObserver: ResizeObserver | undefined;
-    // params: { width: number | undefined, height: number | undefined} | undefined;
     two: Two | undefined;
     shapes: Array<any> = [];
     constructor() {
@@ -34,14 +33,12 @@ customElements.define('astro-timeline', class extends HTMLElement {
                                 - parseFloat(getComputedStyle(this.parentElement!).paddingTop) 
                                 - parseFloat(getComputedStyle(this.parentElement!).paddingBottom);
         const params = { width: this.clientWidth, height: computedHeight};
-        console.log(params);
         this.two = new Two(params).appendTo(this);
         this.two!.bind('resize', () => {
             this.refresh();
         });
     }
     createVector(beginningDate: string, endDate: string) {
-        console.log("drawing vector");
         const circleX = 70;
         const circle1Y = 10;
         const circle2Y = this.two!.height!-5;

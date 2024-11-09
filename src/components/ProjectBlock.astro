@@ -1,0 +1,52 @@
+---
+import githubLogo from '../images/svg/github.svg';
+
+const { project } = Astro.props;
+const { Content, headings } = await project.render();
+console.log(project)
+---
+
+<div class="border-zinc-700 border rounded-xl w-[49%] p-4 flex flex-col justify-between content-between">
+    <div class="flex flex-row justify-between">
+        <span>
+            <h1 class="font-medium">
+                {project.data.title} 
+                {project.data.year != "ongoing" ? <span class="text-xs font-mono ml-1">{project.data.year} </span> : <span class="ongoing ml-1 text-xs text-yellow-500">in progress</span>}
+            </h1>
+        </span>
+        { project.data.url && project.url != "" ? <a href={project.data.url} target="_blank"><img src={githubLogo.src} class="float-end socialIcon"></a> : "" }
+    </div>
+    <div class="py-2 ">
+        <Content/>
+    </div>
+    <ul class="flex flex-wrap text-base gap-x-1 gap-y-1">
+        {
+            project.data.tags.map((tag: string) => (
+                <li v-for="tag in projectPage.tags" class="bg-neutral-800 hover:bg-neutral-700 hover:cursor-pointer text-xs rounded-full px-2 py-1 inline-block">
+                    {tag}
+                </li>
+            ))
+        }
+    </ul>
+</div>
+
+<style>
+    @keyframes opacity-animation {
+        0%   {opacity: 0;}
+        50% {opacity: 1;}
+        100% {opacity: 0;}
+    }
+    .ongoing::before {
+        display: inline-block;
+        content: "*";
+        vertical-align: -25%; 
+        aspect-ratio: 1;
+        height: 0.5rem;
+        @apply mr-1;
+        @apply rounded-full;
+        @apply bg-yellow-500;
+        animation-name: opacity-animation;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+    }
+</style>

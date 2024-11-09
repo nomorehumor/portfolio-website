@@ -2,7 +2,7 @@
 id: 2
 company: Breuer GmbH 
 title: Software Engineer Working Student
-tags: [C++, Python, OpenCV, Computer Vision, Embedded]
+tags: [C++, Python, OpenCV, CUDA, Nvidia Jetson, Computer Vision]
 beginningDate: 02.2024
 endDate: Today
 url: https://www.breuer-gmbh.de/

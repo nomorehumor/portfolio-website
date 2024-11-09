@@ -2,9 +2,6 @@
 import type { CollectionEntry } from 'astro:content';
 import Timeline from './Timeline.astro';
 
-interface Props {
-  cvBlock: CollectionEntry<'cv'>;
-}
 
 const { cvBlock } = Astro.props;
 const { Content, headings } = await cvBlock.render();

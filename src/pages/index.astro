@@ -14,8 +14,8 @@ cvBlocks.sort((block1, block2) => (block2.data.id - block1.data.id));
 const projects = await getCollection('projects');
 projects.sort((project1, project2) => project1.data.year == "ongoing" ? -1 : project2.data.year == "ongoing" ? 1 : (project2.data.year - project1.data.year));
 
-// const voluntary = await getCollection('voluntary');
-// voluntary.sort((project1, project2) => project1.data.year == "ongoing" ? -1 : project2.data.year == "ongoing" ? 1 : (project2.data.id - project1.data.id));
+const voluntary = await getCollection('voluntary');
+voluntary.sort((project1, project2) => project1.data.year == "ongoing" ? -1 : project2.data.year == "ongoing" ? 1 : (project2.data.id - project1.data.id));
 ---
 <html class="bg-[#121212]">
 	<head>
@@ -57,10 +57,14 @@ projects.sort((project1, project2) => project1.data.year == "ongoing" ? -1 : pro
 			<div class="w-full mt-8">
 				<h2 class="text-left border-neutral-800 border-b-2">
 					<span id="work-tablink" class="tablink" onclick="openWork()">Work Experience</span>
-					<span id="projects-tablink" class="tablink ml-2" onclick="openProjects()">Projects</span>
+					<span id="voluntary-tablink" class="tablink ml-4" onclick="openVoluntary()">Voluntary Work</span>
+					<span id="projects-tablink" class="tablink ml-4" onclick="openProjects()">Projects</span>
 				</h2>
 				<div id="work" class="flex flex-col place-items-center justify-center">
 					{cvBlocks.map(block => (<CVBlock cvBlock={block}></CVBlock>))}
+				</div>
+				<div id="voluntary" class="flex flex-col place-items-center justify-center"> 
+					{voluntary.map(block => (<CVBlock cvBlock={block}></CVBlock>))}
 				</div>
 				<div id="projects" class="flex flex-col flex-wrap gap-x-1 gap-y-4 justify-between mt-4 sm:flex-row">
 					{projects.map(project => (<ProjectBlock project={project}></ProjectBlock>))}
@@ -153,19 +157,37 @@ main {
 <script is:inline>
 	// Initial state
 	document.getElementById('projects').style.display = 'none';
-	document.getElementById('work-tablink').classList.add('activeTablink');
+	document.getElementById('voluntary').style.display = 'none';
 
-	function openProjects() {
-		document.getElementById('work').style.display = 'none';
-		document.getElementById('projects').style.display = 'flex';
-		document.getElementById('work-tablink').classList.remove('activeTablink');
-		document.getElementById('projects-tablink').classList.add('activeTablink');
-	}
+	document.getElementById('work-tablink').classList.add('activeTablink');
 
 	function openWork() {
 		document.getElementById('work').style.display = 'flex';
 		document.getElementById('projects').style.display = 'none';
+		document.getElementById('voluntary').style.display = 'none';
+
 		document.getElementById('work-tablink').classList.add('activeTablink');
 		document.getElementById('projects-tablink').classList.remove('activeTablink');
+		document.getElementById('voluntary-tablink').classList.remove('activeTablink');
+	}
+
+	function openProjects() {
+		document.getElementById('work').style.display = 'none';
+		document.getElementById('projects').style.display = 'flex';
+		document.getElementById('voluntary').style.display = 'none';
+
+		document.getElementById('work-tablink').classList.remove('activeTablink');
+		document.getElementById('projects-tablink').classList.add('activeTablink');
+		document.getElementById('voluntary-tablink').classList.remove('activeTablink');
+	}
+
+	function openVoluntary() {
+		document.getElementById('work').style.display = 'none';
+		document.getElementById('projects').style.display = 'none';
+		document.getElementById('voluntary').style.display = 'flex';
+
+		document.getElementById('work-tablink').classList.remove('activeTablink');
+		document.getElementById('projects-tablink').classList.remove('activeTablink');
+		document.getElementById('voluntary-tablink').classList.add('activeTablink');
 	}
 </script>

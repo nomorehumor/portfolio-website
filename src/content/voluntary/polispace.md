@@ -1,10 +1,10 @@
 ---
-id: 1
-company: KITcar e.V.
-title: Team Member & Perception Team Lead
-tags: [C++, Python, OpenCV, Computer Vision, Embedded]
+id: 2
+company: Polispace
+title: Computer Vision Engineer
+tags: [C++, Python, OpenCV, Computer Vision, CUDA]
 beginningDate: 01.2021
-endDate: 05.2022
+endDate: Today
 url: https://kitcar-team.de/
 ---
 Developing an autonomous car model in a student group at KIT. Our team participated in a competition for many years and won the ones in 2020, 2021 and 2022. <br/>

@@ -5,4 +5,4 @@ I am a software developer with B.Sc. Computer Science degree from <a href="https
 
 <br/>
 
-Currently working in Berlin as an intern software developer at <a href="https://www.jetbrains.com" target="_blank" class="underline decoration-1">JetBrains</a> and working on my Master's thesis.
+Currently working in Berlin as an intern software developer at <a href="https://www.jetbrains.com" target="_blank" class="underline decoration-1">JetBrains</a> and writing my Master's thesis.

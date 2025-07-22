@@ -9,7 +9,21 @@ import ProjectBlock from '../components/ProjectBlock.astro';
 import {Content as Brief} from '../content/main/brief.md';
 
 const cvBlocks = await getCollection('cv');
-cvBlocks.sort((block1, block2) => (block2.data.id - block1.data.id));
+cvBlocks.sort((block1, block2) => {
+	// Convert to string to ensure we can use string methods
+	const endDate1 = String(block1.data.endDate);
+	const endDate2 = String(block2.data.endDate);
+	
+	// Handle "Today" case - put it first (most recent)
+	if (endDate1 === "Today") return -1;
+	if (endDate2 === "Today") return 1;
+	
+	// For regular dates, parse MM.YYYY format
+	const date1 = parseInt(endDate1.split('.').reverse().join(''));
+	const date2 = parseInt(endDate2.split('.').reverse().join(''));
+	
+	return date2 - date1;
+});
 
 const projects = await getCollection('projects');
 projects.sort((project1, project2) => project1.data.year == "ongoing" ? -1 : project2.data.year == "ongoing" ? 1 : (project2.data.year - project1.data.year));
